@@ -4,10 +4,10 @@ These are self created since I caanot publish any code or data from my workplace
 table of content
 
 (EDA step)
-Gaming industry
-health care industry
-retail and marketing
-real state
+[1. Gaming industry]()
+[2. health care industry]()
+[3. retail and marketing]()
+[4. real state]()
 
 
 
