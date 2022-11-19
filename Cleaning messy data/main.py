@@ -1,45 +1,51 @@
 import pandas as pd
+import numpy as np
 
 
+# ----- netflix data
 data = pd.read_csv('netflix1.csv')
 df = pd.DataFrame(data)
-
-columns = df.columns.values
 
 
 # steps
 # set index
+# drop unnecessary columns
 # remove duplicates
-# remove mistakes
+# join tables
+
 
 # set index
 if df['show_id'].is_unique == True:
     df.set_index('show_id',inplace=True)
 
+# drop unnecessary columns
+toDrop = ['date_added','duration']
+df.drop(columns=toDrop,inplace=True)
+
 # remove duplicates
 df.drop_duplicates(inplace=True)
 
-# remove mistakes
+# all columns are without mistake and wrong data
 
-# # col1--------------
-# # all show_id start with s and follows by a number so any value that doesn't is a mistake
-# correct = df['show_id'].str.startswith('s')
-# correct = pd.DataFrame(correct)
-# des1 = correct.describe()  # the result shows that everything is in order in this column
-
-# # col2-----------
-# des2 = df['type'].describe()  
-# values = pd.unique(df['type'])
-# # result : array(['Movie', 'TV Show'], dtype=object) --> there is no mistake
-
-# col2-----------
-des3 = df['title'].describe() #this code shows that there are duplicates and missformated data
-# df['title'] = 
-df['title'].astype('string')
+#------Imdb data
+data1 = pd.read_csv('imdb_top_1000.csv')
+df1 = pd.DataFrame(data1)
+# find the title of columns
+cols = df1.columns.values
+# we only need 'Series_Title' and 'IMDB_Rating'
+cols = np.array(cols)
+delCol = np.delete(cols,[1,6])
+df1.drop(columns = delCol,inplace=True)
+#changing the name of the columns
+df1.rename(columns={'Series_Title':'title'},inplace=True)
 
 
-# this codes gives error which means there are mistakes in this column
 
+#-------joining two dataset (left outer join)
+# we want only values in the df that have an IMDB rating in df1
+jo = pd.merge(df,df1,how='left', on = ['title'])
+jo.dropna(inplace=True)
 
-print(des3)
+# now we have a nice dataframe with 172 records.
+
 
