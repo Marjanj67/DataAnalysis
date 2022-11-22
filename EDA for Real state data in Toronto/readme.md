@@ -5,4 +5,4 @@ Data Cleaning
 Univariate Analysis
 Bivariate Analysis
 
-r2 score for linear regression :-0.37104498325649327
+r2 score for linear regression :0.577776808271866
