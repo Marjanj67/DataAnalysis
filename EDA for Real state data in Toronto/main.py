@@ -70,7 +70,7 @@ def main():
     neg = 'Ajax'
     df_temp = df.where(df['Location']==neg).dropna()
     df_temp = df_temp.groupby(by = 'year',as_index=False).mean()
-    df_temp.sort_values('year', inplace=True,ascending=False)
+    df_temp.sort_values('year', inplace=True,ascending=True)
 
     # without regresion ---------------
     # fig , ax = plt.subplots(1)
@@ -79,28 +79,44 @@ def main():
     # fig.savefig('line1.png')
     
     # with regresion -------------------
+    df_temp.drop(columns = ['Unnamed: 0','CompIndex',
+       'CompYoYChange', 'SFDetachIndex', 'SFDetachBenchmark',
+       'SFDetachYoYChange', 'SFAttachIndex', 'SFAttachBenchmark',
+       'SFAttachYoYChange', 'THouseIndex', 'THouseBenchmark',
+       'THouseYoYChange', 'ApartIndex', 'ApartBenchmark',
+       'ApartYoYChange'] ,inplace = True)
+    #create a dictionary for the column 'year'
     NormalDict = {}
     ind = 0
     for y in df_temp['year'].unique():
         NormalDict[y] = ind
         ind += 1
+    NormalDict['2022'] = 7
+    NormalDict['2023'] = 8
 
-
+    # run regression model
+    
     X = df_temp['year'].map(NormalDict).values.reshape(-1, 1)
     y = df_temp['CompBenchmark'].values.reshape(-1, 1)
-    reg = LinearRegression()
-    reg.fit(X,y)
-    new_x = np.array([7])
-    new_x = new_x.reshape(-1,1)
-    new_y =reg.predict(new_x)
+    RegType = 'linear'
+    if RegType == 'linear':
+        reg = LinearRegression()
+        reg.fit(X,y)
+        year_p = '2022'
+        new_x = np.array([NormalDict[year_p]])
+        new_x = new_x.reshape(-1,1)
+        new_y =reg.predict(new_x)
+        new_x_index = list(NormalDict.values()).index(new_x[0][0])
+        new_x = list(NormalDict.keys())[new_x_index]
+        new_df = pd.DataFrame({'year': new_x,'CompBenchmark':new_y[0]})
 
-
+    # plotting with new data
     fig , ax = plt.subplots(1)
-    df_temp = pd.concat(df_temp,pd.DataFrame(new_x,new_y))
+    df_temp = pd.concat([df_temp,new_df])
     ax.plot(df_temp['year'],df_temp['CompBenchmark'] ,color = color2[2])
     ax.set_title('price change in ' + neg + ' over the years')
     # ax.plot(new_x,new_Y,c=color3[0])
-    fig.savefig('line1.png')
+    fig.savefig('linearReg.png')
 
     plt.show()
     # print(df.head())
