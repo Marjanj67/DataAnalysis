@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
 
 color1 = sns.color_palette('rocket_r',71)
 color2 = sns.color_palette('rocket',10)
@@ -40,7 +41,7 @@ def main():
     global df
     # data = pd.read_csv('MLS.csv')
     # df = pd.DataFrame(data)
-    #-------- cleaning the data
+    #**********************************cleaning the data**********************************
     # DataClean(df)
     # pd.DataFrame.to_csv(df,'cleanedData.csv')
 
@@ -48,11 +49,11 @@ def main():
     data = pd.read_csv('cleanedData.csv')
     df = pd.DataFrame(data)
 
-    # --------------------Univariate Analysis-------------------
+    # **********************************Univariate Analysis**********************************
     # thre are no useful Univariate Analysis for this data
 
-    # --------------------Bivariate Analysis---------------------
-    # # ------------ barh start --------
+    # **********************************Bivariate Analysis**********************************
+    # # ------------ barh begining -----------------------------------------------------------------------------
     # plotyear = '2021'
     # plotyear = pd.to_numeric(plotyear)
     # df_temp = df.where(df['year']==plotyear).dropna()
@@ -66,7 +67,9 @@ def main():
     # plt.bar_label(bars,fontsize = 35,fmt = '%d')
     # fig.set_size_inches(50,70)
     # fig.savefig('fig1.png')
-    # # ------------ barh end --------
+    # # ------------ barh end -------------------------------------------------------------------------------
+
+    # # -------------line chart begining ---------------------------------------------------------------------
     neg = 'Ajax'
     df_temp = df.where(df['Location']==neg).dropna()
     df_temp = df_temp.groupby(by = 'year',as_index=False).mean()
@@ -98,17 +101,24 @@ def main():
     
     X = df_temp['year'].map(NormalDict).values.reshape(-1, 1)
     y = df_temp['CompBenchmark'].values.reshape(-1, 1)
-    RegType = 'linear'
-    if RegType == 'linear':
-        reg = LinearRegression()
-        reg.fit(X,y)
-        year_p = '2022'
-        new_x = np.array([NormalDict[year_p]])
-        new_x = new_x.reshape(-1,1)
-        new_y =reg.predict(new_x)
-        new_x_index = list(NormalDict.values()).index(new_x[0][0])
-        new_x = list(NormalDict.keys())[new_x_index]
-        new_df = pd.DataFrame({'year': new_x,'CompBenchmark':new_y[0]})
+    X_train = X
+    y_train = y
+    X_test = X[5:]
+    y_test = y[5:]
+
+
+    reg = LinearRegression()
+    reg.fit(X_train,y_train)
+    y_predict = reg.predict(X_test.reshape(-1, 1))
+    R2score = r2_score(y_test,y_predict)
+    print(R2score)
+    year_p = '2022'
+    new_x = np.array([NormalDict[year_p]])
+    new_x = new_x.reshape(-1,1)
+    new_y =reg.predict(new_x)
+    new_x_index = list(NormalDict.values()).index(new_x[0][0])
+    new_x = list(NormalDict.keys())[new_x_index]
+    new_df = pd.DataFrame({'year': new_x,'CompBenchmark':new_y[0]})
 
     # plotting with new data
     fig , ax = plt.subplots(1)
@@ -117,6 +127,16 @@ def main():
     ax.set_title('price change in ' + neg + ' over the years')
     # ax.plot(new_x,new_Y,c=color3[0])
     fig.savefig('linearReg.png')
+    # # -------------line chart begining ---------------------------------------------------------------
+
+
+
+
+
+
+
+
+
 
     plt.show()
     # print(df.head())
