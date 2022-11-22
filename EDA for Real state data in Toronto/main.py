@@ -70,78 +70,101 @@ def main():
     # # ------------ barh end -------------------------------------------------------------------------------
 
     # # -------------line chart begining ---------------------------------------------------------------------
-    neg = 'Ajax'
-    df_temp = df.where(df['Location']==neg).dropna()
-    df_temp = df_temp.groupby(by = 'year',as_index=False).mean()
-    df_temp.sort_values('year', inplace=True,ascending=True)
+    # neg = 'Ajax'
+    # df_temp = df.where(df['Location']==neg).dropna()
+    # df_temp = df_temp.groupby(by = 'year',as_index=False).mean()
+    # df_temp.sort_values('year', inplace=True,ascending=True)
 
-    # without regresion ---------------
+    ## without regresion ---------------
     # fig , ax = plt.subplots(1)
     # ax.plot(df_temp['year'],df_temp['CompBenchmark'] ,color = color2[5])
     # ax.set_title('price change in ' + neg + ' over the years')
     # fig.savefig('line1.png')
     
-    # with regresion -------------------
-    df_temp.drop(columns = ['Unnamed: 0','CompIndex',
-       'CompYoYChange', 'SFDetachIndex', 'SFDetachBenchmark',
-       'SFDetachYoYChange', 'SFAttachIndex', 'SFAttachBenchmark',
-       'SFAttachYoYChange', 'THouseIndex', 'THouseBenchmark',
-       'THouseYoYChange', 'ApartIndex', 'ApartBenchmark',
-       'ApartYoYChange'] ,inplace = True)
-    #create a dictionary for the column 'year'
-    NormalDict = {}
-    ind = 0
-    for y in df_temp['year'].unique():
-        NormalDict[y] = ind
-        ind += 1
-    NormalDict['2022'] = 7
-    NormalDict['2023'] = 8
+    # # with regresion -------------------
+    # df_temp.drop(columns = ['Unnamed: 0','CompIndex',
+    #    'CompYoYChange', 'SFDetachIndex', 'SFDetachBenchmark',
+    #    'SFDetachYoYChange', 'SFAttachIndex', 'SFAttachBenchmark',
+    #    'SFAttachYoYChange', 'THouseIndex', 'THouseBenchmark',
+    #    'THouseYoYChange', 'ApartIndex', 'ApartBenchmark',
+    #    'ApartYoYChange'] ,inplace = True)
+    # #create a dictionary for the column 'year'
+    # NormalDict = {}
+    # ind = 0
+    # for y in df_temp['year'].unique():
+    #     NormalDict[y] = ind
+    #     ind += 1
+    # NormalDict['2022'] = 7
+    # NormalDict['2023'] = 8
 
-    # run regression model
+    # # run regression model
     
-    X = df_temp['year'].map(NormalDict).values.reshape(-1, 1)
-    y = df_temp['CompBenchmark'].values.reshape(-1, 1)
-    X_train = X
-    y_train = y
-    X_test = X[5:]
-    y_test = y[5:]
+    # X = df_temp['year'].map(NormalDict).values.reshape(-1, 1)
+    # y = df_temp['CompBenchmark'].values.reshape(-1, 1)
+    # X_train = X
+    # y_train = y
+    # X_test = X[5:]
+    # y_test = y[5:]
 
 
-    reg = LinearRegression()
-    reg.fit(X_train,y_train)
-    y_predict = reg.predict(X_test.reshape(-1, 1))
-    R2score = r2_score(y_test,y_predict)
-    print(R2score)
-    year_p = '2022'
-    new_x = np.array([NormalDict[year_p]])
-    new_x = new_x.reshape(-1,1)
-    new_y =reg.predict(new_x)
-    new_x_index = list(NormalDict.values()).index(new_x[0][0])
-    new_x = list(NormalDict.keys())[new_x_index]
-    new_df = pd.DataFrame({'year': new_x,'CompBenchmark':new_y[0]})
+    # reg = LinearRegression()
+    # reg.fit(X_train,y_train)
+    # y_predict = reg.predict(X_test.reshape(-1, 1))
+    # R2score = r2_score(y_test,y_predict)
+    # print(R2score)
+    # year_p = '2022'
+    # new_x = np.array([NormalDict[year_p]])
+    # new_x = new_x.reshape(-1,1)
+    # new_y =reg.predict(new_x)
+    # new_x_index = list(NormalDict.values()).index(new_x[0][0])
+    # new_x = list(NormalDict.keys())[new_x_index]
+    # new_df = pd.DataFrame({'year': new_x,'CompBenchmark':new_y[0]})
 
-    # plotting with new data
+    # # plotting with new data
+    # fig , ax = plt.subplots(1)
+    # df_temp = pd.concat([df_temp,new_df])
+    # ax.plot(df_temp['year'],df_temp['CompBenchmark'] ,color = color2[2])
+    # ax.set_title('price change in ' + neg + ' over the years')
+    # # ax.plot(new_x,new_Y,c=color3[0])
+    # fig.savefig('linearReg.png')
+    # # -------------line chart end ---------------------------------------------------------------
+
+    ## -------------- multiple bar chart begining
+    plotyear = '2020'
+    plotyear = pd.to_numeric(plotyear)
+    df_temp = df.where(df['year']==plotyear).dropna()
+    df_temp = df_temp.groupby(by = 'Location',as_index=False).mean()
+    df_temp = df_temp.iloc[0:5,:]
+    df_temp.drop(columns = ['Unnamed: 0','CompIndex','CompYoYChange','CompBenchmark', 'SFDetachIndex', 
+       'SFDetachYoYChange', 'SFAttachIndex', 'SFAttachYoYChange', 'THouseIndex', 
+       'THouseYoYChange', 'ApartIndex', 'ApartYoYChange','year'] ,inplace = True)
+
+    x = np.arange(len(df_temp['Location']))
+    width = .2
     fig , ax = plt.subplots(1)
-    df_temp = pd.concat([df_temp,new_df])
-    ax.plot(df_temp['year'],df_temp['CompBenchmark'] ,color = color2[2])
-    ax.set_title('price change in ' + neg + ' over the years')
-    # ax.plot(new_x,new_Y,c=color3[0])
-    fig.savefig('linearReg.png')
-    # # -------------line chart begining ---------------------------------------------------------------
+    rect1 = ax.bar(x-.3,df_temp['SFDetachBenchmark'],width,label = 'SF Detached home',color = color1[10])
+    rect2 = ax.bar(x-.1,df_temp['SFAttachBenchmark'],width,label = 'SF Attached home',color = color1[20])
+    rect3 = ax.bar(x+.1,df_temp['THouseBenchmark'],width,label = 'T House',color = color1[30])
+    rect4 = ax.bar(x+.3,df_temp['ApartBenchmark'],width,label = 'Apartment',color = color1[40])
+
+    ax.set_ylabel('Price')
+    plt.xlabel('Location')
+    ax.set_title('price for different housing types')
+    ax.set_xticks(x, df_temp['Location'])
+    ax.ticklabel_format( axis='y',style = 'plain')
+    ax.legend()
+
+    ax.bar_label(rect1, padding=3 , fmt = '%d')
+    ax.bar_label(rect2, padding=3)
+    ax.bar_label(rect3, padding=3)
+    ax.bar_label(rect4, padding=3)
+
+    fig.set_size_inches(22,8)
+    fig.savefig('groupBar.png')
 
 
 
-
-
-
-
-
-
-
-    plt.show()
-    # print(df.head())
-
-
+    # plt.show()
 
 
 
