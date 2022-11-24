@@ -214,8 +214,8 @@ df.describe()
     fig.set_size_inches(22,8)
     fig.savefig('groupBar.png')
 ```
-![](groupBar - 2020.png)
-![](groupBar - 2021.png)
+![](groupBar-2020.png)
+![](groupBar-2021.png)
 
 ## merge with another dataset
 
