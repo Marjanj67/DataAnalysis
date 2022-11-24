@@ -82,3 +82,17 @@ In the data cleaning process i deleted the duplicates and null records, replaced
     df.drop(columns='Date',inplace=True)
     # now we are ready for some analysis
 ```
+After cleaning, this is what this dataset looks like:
+```
+# head
+df.head(10)
+```
+![](headaftercleaning.png)
+```
+# describe
+df.describe()
+```
+![](describeaftercleaning.png)
+
+
+
