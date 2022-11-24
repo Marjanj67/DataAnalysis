@@ -35,5 +35,50 @@ Bivariate Analysis
 r2 score for linear regression :0.577776808271866
 
 ## Data collection
+In this part, i imported the data using pandas dataframe and then converted it to a Dateframe. The output shows that everything was imported correctly.
+```
+    data = pd.read_csv('MLS.csv')
+    df = pd.DataFrame(data)
+    df.head(5)
+```
+output:
+```
+            Location  CompIndex  ...  ApartYoYChange        Date
+0  Adjala-Tosorontio      143.7  ...             NaN  2015-07-01
+1  Adjala-Tosorontio      140.8  ...             NaN  2015-08-01
+2  Adjala-Tosorontio      142.7  ...             NaN  2015-09-01
+3  Adjala-Tosorontio      138.4  ...             NaN  2015-10-01
+4  Adjala-Tosorontio      145.4  ...             NaN  2015-11-01
 
+[5 rows x 17 columns]
+```
 ## Data cleaning
+In the data cleaning process i deleted the duplicates and null records, replaced some nulls and created a column named year. I decided to drop Date column and use the year and month for easier analysis.
+
+```
+    df.drop_duplicates(inplace=True)
+    cols = df.columns.values
+    # drop na based on 'CompIndex'
+    if df['CompIndex'].isnull().sum() >0:
+        df.dropna(subset=['CompIndex'],inplace=True)
+
+    #check if all price columns are float
+    for c in cols:
+        if 'Location' not in str(c) and 'Date' not in str(c) :
+            df[c].fillna(df[c].mean(),inplace=True)  # fill null with zeroes
+            if df[c].dtype != 'float64':
+                df[c].apply(pd.to_numeric)
+
+    # check other nulls
+    nulls = df.isnull().sum()
+    if nulls.max() == 0:
+        print('Bravoo, there are no nulls')
+
+    #create a year coloumn
+    df['Date'].apply(pd.to_datetime)
+    df['year'] = pd.DatetimeIndex(df['Date']).year
+    df['month'] = pd.DatetimeIndex(df['Date']).month
+    # delete unwanted variables (Date)
+    df.drop(columns='Date',inplace=True)
+    # now we are ready for some analysis
+```
