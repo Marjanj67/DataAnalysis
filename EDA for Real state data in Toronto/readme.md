@@ -114,7 +114,7 @@ df.describe()
     
 
 ```
-![](barh1.PNG)
+![](barh1.png)
 
 
 ### Line chart
@@ -177,8 +177,8 @@ df.describe()
     # ax.plot(new_x,new_Y,c=color3[0])
     fig.savefig('linearReg.png')
 ```
-![](line1.PNG)
-![](linearReg.PNG)
+![](line1.png)
+![](linearReg.png)
 
 ### grouped bar chart
 ```
@@ -214,8 +214,8 @@ df.describe()
     fig.set_size_inches(22,8)
     fig.savefig('groupBar.png')
 ```
-![](groupBar - 2020.PNG)
-![](groupBar - 2021.PNG)
+![](groupBar - 2020.png)
+![](groupBar - 2021.png)
 
 ## merge with another dataset
 
