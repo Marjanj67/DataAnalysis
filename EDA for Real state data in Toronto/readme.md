@@ -226,14 +226,18 @@ In this part i will add some boolean data that i've created. i'll call it marjan
     for i in df['Location']:
         r = np.random.choice(2,1)
         marjan_index.append(r[0])
-
-    print(marjan_index)
+        
     df.loc[:,'marjan_index'] = marjan_index
-    print(df['marjan_index'])
     pd.DataFrame.to_csv(df,'newData.csv')
 
 
 ```
 
+
+```
+    data = pd.read_csv('newData.csv')
+    df = pd.DataFrame(data)
+    
+```
 ## some analysis
 
