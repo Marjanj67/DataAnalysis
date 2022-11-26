@@ -218,8 +218,22 @@ As shown by r2 score and the figure above it's not a good estimate.
 ![](groupBar-2020.png)
 ![](groupBar-2021.png)
 
-## merge with another dataset
+Target distribution \
+## Adding data
+In this part i will add some boolean data that i've created. i'll call it marjan_index
+```
+    marjan_index = []
+    for i in df['Location']:
+        r = np.random.choice(2,1)
+        marjan_index.append(r[0])
 
+    print(marjan_index)
+    df.loc[:,'marjan_index'] = marjan_index
+    print(df['marjan_index'])
+    pd.DataFrame.to_csv(df,'newData.csv')
+
+
+```
 
 ## some analysis
 
