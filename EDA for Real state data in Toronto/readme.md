@@ -27,12 +27,12 @@ All YoY Changes are in context of "Percentages"
 
 ## EDA steps
 
-Data Collection
-Data Cleaning
-Univariate Analysis
-Bivariate Analysis
+* Data Collection\
+* Data Cleaning\
+* Univariate Analysis\
+* Bivariate Analysis
 
-r2 score for linear regression :0.577776808271866
+
 
 ## Data collection
 In this part, i imported the data using pandas dataframe and then converted it to a Dateframe. The output shows that everything was imported correctly.
@@ -179,7 +179,8 @@ df.describe()
 ```
 ![](line1.png)
 ![](linearReg.png)
-
+r2 score for linear regression :0.577776808271866\
+As shown by r2 score and the figure above it's not a good estimate.
 ### grouped bar chart
 ```
     plotyear = '2020'
