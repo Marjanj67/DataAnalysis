@@ -6,6 +6,7 @@ Data science has had a huge effect on realstate industry. In this project i will
 2. [EDA steps](#eda-steps)
 3. [Data collection](#data-collection)
 4. [Data cleaning](#data-cleaning)
+5. [Plotting data](#Plotting-data)
 
 
 
@@ -27,10 +28,9 @@ All YoY Changes are in context of "Percentages"
 
 ## EDA steps
 
-* Data Collection\
-* Data Cleaning\
-* Univariate Analysis\
-* Bivariate Analysis
+* Data Collection
+* Data Cleaning
+* Plotting data
 
 
 
