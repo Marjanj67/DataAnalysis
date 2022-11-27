@@ -235,9 +235,24 @@ In this part i will add some boolean data that i've created. i'll call it marjan
 
 
 ```
+    # loading the new data
     data = pd.read_csv('newData.csv')
     df = pd.DataFrame(data)
     
+    # split into two dataset
+    z = df[(df['marjan_index']==0)]
+    o = df[(df['marjan_index']==1)]
+    
+    # plotting
+    fig , ax = plt.subplots(1)
+    bars = ax.barh(['Zeroes','Ones'],[len(z),len(o)],color=color2)
+    ax.set_title('The count of ones and zeroes',fontsize = 50)
+    plt.yticks(fontsize = 40)
+    plt.xticks(fontsize = 40)
+    fig.set_size_inches(70,10)
+    fig.savefig('barh2.png')
+    
 ```
+![](barh2.png)
 ## some analysis
 
