@@ -288,4 +288,5 @@ data = pd.read_csv('newData.csv')
     fig.set_size_inches(30,20)
     
 ```
-
+![](hist.png)
+## Correlation matrix
