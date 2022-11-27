@@ -245,7 +245,7 @@ In this part i will add some boolean data that i've created. i'll call it marjan
     
     # plotting
     fig , ax = plt.subplots(1)
-    bars = ax.barh(['Zeroes','Ones'],[len(z),len(o)],color=color2)
+    bars = ax.barh(['Zeroes','Ones'],[len(z),len(o)],color=[color1[20],color2[0]])
     ax.set_title('The count of ones and zeroes',fontsize = 50)
     plt.yticks(fontsize = 40)
     plt.xticks(fontsize = 40)
