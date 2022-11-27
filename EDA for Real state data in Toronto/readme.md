@@ -223,17 +223,24 @@ Target distribution \
 In this part i will add some boolean data that i've created. i'll call it marjan_index
 ```
     marjan_index = []
+    df_temp = df.groupby(by = 'Location').mean()
+    n = 0
     for i in df['Location']:
-        r = np.random.choice(2,1)
+        pr = df.iloc[[n]]['CompBenchmark']
+        if pr[n] >= 500000 :
+            r = np.random.choice(2,1,p=[.11,.89])
+        else:
+            r = np.random.choice(2,1,p=[.85,.15])
         marjan_index.append(r[0])
-        
+        n+=1
+
     df.loc[:,'marjan_index'] = marjan_index
     pd.DataFrame.to_csv(df,'newData.csv')
 
 
 ```
 
-
+## loading the new data and plotting counts
 ```
     # loading the new data
     data = pd.read_csv('newData.csv')
@@ -244,9 +251,14 @@ In this part i will add some boolean data that i've created. i'll call it marjan
     o = df[(df['marjan_index']==1)]
     
     # plotting
+    data = pd.read_csv('newData.csv')
+    df = pd.DataFrame(data)
+    # split into two dataset
+    z = df[(df['marjan_index']==0)]
+    o = df[(df['marjan_index']==1)]
     fig , ax = plt.subplots(1)
-    bars = ax.barh(['Zeroes','Ones'],[len(z),len(o)],color=[color1[20],color2[0]])
-    ax.set_title('The count of ones and zeroes',fontsize = 50)
+    bars = ax.barh(['not Expensive','Expensive'],[len(z),len(o)],color=[color1[20],color2[0]])
+    ax.set_title('The count of Expensive and not Expensive',fontsize = 50)
     plt.yticks(fontsize = 40)
     plt.xticks(fontsize = 40)
     fig.set_size_inches(70,10)
@@ -254,5 +266,26 @@ In this part i will add some boolean data that i've created. i'll call it marjan
     
 ```
 ![](barh2.png)
-## some analysis
+## plotting distribution
+```
+data = pd.read_csv('newData.csv')
+    df = pd.DataFrame(data)
+    notExpensive = df[(df['marjan_index']==0)]
+    expensive = df[(df['marjan_index']==1)]
+    fig , ax = plt.subplots(2,1)
+    ax[0].hist(notExpensive['CompBenchmark'],color = color1[50])
+    ax[1].hist(expensive['CompBenchmark'],color = color1[20])
+    ax[0].set_title('Distribution for not Expensive neigborhoods',fontsize = 30)
+    ax[1].set_title('Distribution for Expensive neigborhoods',fontsize = 30)
+    ax[0].set_xlabel('Price',fontsize = 30)
+    ax[1].set_xlabel('Price',fontsize = 30)  
+    ax[0].set_ylabel('Distribution',fontsize = 30)
+    ax[1].set_ylabel('Distribution',fontsize = 30)
+    ax[0].tick_params(axis='both', labelsize=30,)
+    ax[1].tick_params(axis='both', labelsize=30)
+    ax[0].ticklabel_format( axis='x',style = 'plain')
+    ax[1].ticklabel_format( axis='x',style = 'plain')
+    fig.set_size_inches(30,20)
+    
+```
 
