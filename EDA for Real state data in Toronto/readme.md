@@ -290,3 +290,22 @@ data = pd.read_csv('newData.csv')
 ```
 ![](hist.png)
 ## Correlation matrix
+```
+    data = pd.read_csv('newData.csv')
+    df = pd.DataFrame(data)
+    correlation = data.corr()
+    to_drop = ['Unnamed: 0.1','Unnamed: 0','marjan_index']
+    correlation.drop(columns = to_drop,inplace=True)
+    correlation.drop(to_drop,axis=0 ,inplace=True)
+    matrix_cols = correlation.columns.tolist()
+    fig , ax = plt.subplots()
+    ax.imshow(correlation,cmap='rocket')
+    ax.set_xticks(np.arange(len(matrix_cols)),labels = matrix_cols,rotation='vertical')
+    ax.set_yticks(np.arange(len(matrix_cols)),labels = matrix_cols)
+    for i in range(len(matrix_cols)):
+        for j in range(len(matrix_cols)):
+            ax.text(j-.2,i+.12,np.around(correlation.iloc[i,j],decimals = 1))
+    ax.set_title('Correlation between the variables',fontsize = 45,pad = 25)
+    fig.set_size_inches(13,15)
+```
+![](heatmap.png)
