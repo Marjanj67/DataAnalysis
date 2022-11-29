@@ -1,4 +1,7 @@
-![](real-estate-business-compressor.jpg)
+<p align="center">
+  <img src="https://github.com/Marjanj67/DataAnalysis/blob/32f375b4dfa56f9080ad0e4062b6e3f0b648e890/EDA%20for%20Real%20state%20data%20in%20Toronto/real-estate-business-compressor.jpg" alt="Realstate"/>
+</p>
+
 Data science has had a huge effect on realstate industry. In this project i will work with toronto realstate data from 2015 to 2021. This project focuses on data analysis and provides a step-by-step explanation.
 # Data analysis for realstate data in toronto from 2015 to 2021
 # Table of content 
@@ -6,7 +9,8 @@ Data science has had a huge effect on realstate industry. In this project i will
 2. [EDA steps](#eda-steps)
 3. [Data collection](#data-collection)
 4. [Data cleaning](#data-cleaning)
-5. [Plotting data](#Plotting-data)
+5. [Plotting data](#plotting-data)
+6. [Distributions and analysis](#distributions-and-analysis)
 
 
 
@@ -27,7 +31,7 @@ All prices mentioned under "Benchmark" columns are depicted in Canadian Dollars\
 All YoY Changes are in context of "Percentages"
 
 ## EDA steps
-
+In this simple example i perform 3 steps for EDA:
 * Data Collection
 * Data Cleaning
 * Plotting data
@@ -53,7 +57,7 @@ output:
 [5 rows x 17 columns]
 ```
 ## Data cleaning
-In the data cleaning process i deleted the duplicates and null records, replaced some nulls and created a column named year. I decided to drop Date column and use the year and month for easier analysis.
+In the data cleaning process i deleted the duplicates and null records, replaced some nulls and created two column named year and month. I decided to drop Date column and use the year and month for easier analysis.
 
 ```
     df.drop_duplicates(inplace=True)
@@ -62,7 +66,7 @@ In the data cleaning process i deleted the duplicates and null records, replaced
     if df['CompIndex'].isnull().sum() >0:
         df.dropna(subset=['CompIndex'],inplace=True)
 
-    #check if all price columns are float
+    # check if all price columns are float
     for c in cols:
         if 'Location' not in str(c) and 'Date' not in str(c) :
             df[c].fillna(df[c].mean(),inplace=True)  # fill null with zeroes
@@ -74,7 +78,7 @@ In the data cleaning process i deleted the duplicates and null records, replaced
     if nulls.max() == 0:
         print('Bravoo, there are no nulls')
 
-    #create a year coloumn
+    # create a year coloumn
     df['Date'].apply(pd.to_datetime)
     df['year'] = pd.DatetimeIndex(df['Date']).year
     df['month'] = pd.DatetimeIndex(df['Date']).month
@@ -95,8 +99,9 @@ df.describe()
 ![](describeaftercleaning.PNG)
 
 ## Plotting data
+plotting data is a tool for understanding the data and finding patterns. In this project we use several charts.
 ### horizental bar chart
-
+One of the most important features in our data is location of the property, so i draw a horizontal bar chart that shows locations ffrom most expensive to the least expensive
 ```
     plotyear = '2021'
     plotyear = pd.to_numeric(plotyear)
@@ -118,6 +123,7 @@ df.describe()
 
 
 ### Line chart
+The dataset contains data from 2015 to 2016 and i was interested to see the trend of pricing in different locations. the code and plots are for the location Ajax. I was also interested in estimating a value for 2022 using linear regression.
 ```
     neg = 'Ajax'
     df_temp = df.where(df['Location']==neg).dropna()
@@ -181,7 +187,9 @@ df.describe()
 ![](linearReg.png)
 r2 score for linear regression :0.577776808271866\
 As shown by r2 score and the figure above it's not a good estimate.
+
 ### grouped bar chart
+There are four types of housing in the dataset and i plotted them for different locations to see the demographic diffrences. Since it would create rather large chart, i did it 5 location at the time.
 ```
     plotyear = '2020'
     plotyear = pd.to_numeric(plotyear)
@@ -218,9 +226,10 @@ As shown by r2 score and the figure above it's not a good estimate.
 ![](groupBar-2020.png)
 ![](groupBar-2021.png)
 
-Target distribution \
-## Adding data
-In this part i will add some boolean data that i've created. i'll call it marjan_index
+## Distributions and analysis
+for didtribution analysis it would be useful to have a target variable so i added on named marjan_index.
+### Adding data
+In this part i will add some boolean data that i've created. i'll call it marjan_index and shows the affordability of the location.
 ```
     marjan_index = []
     df_temp = df.groupby(by = 'Location').mean()
@@ -240,7 +249,8 @@ In this part i will add some boolean data that i've created. i'll call it marjan
 
 ```
 
-## loading the new data and plotting counts
+### loading the new data and plotting counts
+For this plot I splitted the dataset into two sub dataframes for expensive and not expensive locations. Then I plotted their counts.
 ```
     # loading the new data
     data = pd.read_csv('newData.csv')
@@ -266,7 +276,8 @@ In this part i will add some boolean data that i've created. i'll call it marjan
     
 ```
 ![](barh2.png)
-## plotting distribution
+### plotting distribution
+For the two dataframes expensive and not expensive, i created the distribution plot using histogram.
 ```
 data = pd.read_csv('newData.csv')
     df = pd.DataFrame(data)
@@ -289,7 +300,8 @@ data = pd.read_csv('newData.csv')
     
 ```
 ![](hist.png)
-## Correlation matrix
+### Correlation matrix
+It's always a good idea to draw the correlation matrix to analyse the data.
 ```
     data = pd.read_csv('newData.csv')
     df = pd.DataFrame(data)
@@ -309,3 +321,5 @@ data = pd.read_csv('newData.csv')
     fig.set_size_inches(13,15)
 ```
 ![](heatmap.png)
+## The end
+I hope this simple demostration shows parts of my EDA skills which are far beyond this projects.
