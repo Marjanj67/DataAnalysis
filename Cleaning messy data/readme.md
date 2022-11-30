@@ -1,4 +1,6 @@
-![films and movies](film1.jpg "films and movies")
+<p align="center">
+  <img src="https://github.com/Marjanj67/DataAnalysis/blob/b87b24f79c46ed2fb9e0264953bbeae19293df33/Cleaning%20messy%20data/film1.jpg" />
+</p>
 # cleaning messy data and joining with another dataset
 
 ## Importing modules and first dataset
