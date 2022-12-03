@@ -5,42 +5,42 @@ import numpy as np
 import seaborn  as sns
 
 
-color1 = sns.color_palette('Set2',10)[0]
-color2 = sns.color_palette('Set2',10)[1]
 
-
+ColorSelect = sns.color_palette('Set3',10)
 
 def plot_market_segment(df):
     marketSegment = df.groupby(['market_segment'],as_index=False).count()
     fig , ax = plt.subplots(1,1)
-    bars = ax.bar(marketSegment['market_segment'],marketSegment['hotel'] ,color = color1)
+    bars = ax.bar(marketSegment['market_segment'],marketSegment['hotel'] ,color = ColorSelect[0])
     plt.xticks(rotation = 45)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.set_title('Market segment')
-    ax.set_xlabel('type of reservation')
-    ax.set_ylabel('count')
+    ax.set_title('Market segments' , fontsize = 20)
+    ax.set_xlabel('Type of reservation', fontsize = 14)
+    ax.set_ylabel('Count', fontsize = 14)
     ax.tick_params(length = 0)
     ax.bar_label(bars)
+    fig.set_size_inches(14,12)
     fig.savefig('bar.png')
     ax.cla()
 
 
 def plot_distribution_channel(df):
+    plt.figure(figsize=(14,12))
     sns.boxplot(df['distribution_channel'],df['adr'],palette="Set3",showmeans = True, meanprops={"marker":"o",
                     "markerfacecolor":"white", 
                     "markeredgecolor":"black",
                     "markersize":"10"})
-    plt.xlabel('distribution channel')
-    plt.ylabel('price per night')
-    plt.title('price affected by distribution channel')
+    plt.xlabel('Distribution channel', fontsize = 14)
+    plt.ylabel('Price per night', fontsize = 14)
+    plt.title('Price affected by distribution channel' , fontsize = 20)
     sns.despine(right=True,top=True)
     plt.savefig('boxplot.png')
     plt.cla()
 
 def plot_time_price(df):
     pd.options.mode.chained_assignment = None
-    df.replace(df['adr'].max(),df['adr'].mean(),inplace=True)
+    # df.replace(df['adr'].max(),df['adr'].mean(),inplace=True)
     rooms = df['reserved_room_type']
     roomsU = rooms.drop_duplicates()
     colors = {}
@@ -53,26 +53,32 @@ def plot_time_price(df):
 
 
     df.replace({'reserved_room_type':colors},inplace=True)
-    scatter = plt.scatter(df['lead_time'],df['adr'],c = df['reserved_room_type'])
+    plt.figure(figsize=(14,12))
+    n = 0
+    for ColorTemp in colors.values():
+        room = list(colors.keys())[n]
+        dfTemp = df[(df['reserved_room_type']== ColorTemp)]
+        plt.scatter(dfTemp['lead_time'],dfTemp['adr'],c = ColorTemp,label=room)
+        n += 1
     plt.gca().spines['top'].set_visible(False)
     plt.gca().spines['right'].set_visible(False)
-    plt.title('effect of the lead  time on price per room')
-    plt.xlabel('lead time')
-    plt.ylabel('price')
+    plt.title('Effect of the lead  time on price per room', fontsize = 20)
+    plt.xlabel('Lead time', fontsize = 14)
+    plt.ylabel('Price', fontsize = 14)
     plt.tick_params(length = 0)
 
-    plt.legend(handles=scatter.legend_elements(), labels=colors.keys())
+    plt.legend()
     plt.savefig('scatter.png')
     plt.cla()
 
 def plot_meal(df):
     ml = df.groupby(by = 'meal',as_index=False).count()
     ml = ml.loc[:,['meal','hotel']]
-    plt.pie(ml['hotel'],labels=ml['meal'],autopct='%0.f%%',shadow=True,explode=[0,0,0,0.5,0],startangle=-130)
-    plt.title('type of meal')
+    plt.pie(ml['hotel'],labels=ml['meal'],autopct='%0.f%%',shadow=True,explode=[0,0,0,0.5,0],startangle=-130,colors=ColorSelect)
+    plt.title('Type of meal')
     plt.text(0.7,-1.2,
-            "Type of meal booked. :\nUndefined/SC :no meal package\nBB : Bed & Breakfast\nHB : Half board ,breakfast and one other meal\nFB : Full board",verticalalignment='bottom', horizontalalignment='left',
-            color='green', fontsize=8)
+            "Type of meal booked. :\nUndefined/SC :no meal package\nBB : Bed & Breakfast\nHB : Half board \nFB : Full board",verticalalignment='bottom', horizontalalignment='left',
+            color='#000000', fontsize=8)
     plt.savefig('pie.png')
     plt.cla()
 
@@ -81,10 +87,12 @@ def plot_month_profit(df):
     years = df.groupby(by = df['monthYear'] ,as_index=False).sum()
     av = df.groupby(by = df['monthYear'],as_index=0).sum()
     avr = av['adr'].mean()
-    plt.fill_between(years['monthYear'],years['adr'],y2 = avr,color = color1)
-    plt.xticks(rotation = 45)
+    plt.figure(figsize=(14,12))
+    plt.fill_between(years['monthYear'],years['adr'],y2 = avr,color = ColorSelect[0])
+    plt.xticks(rotation = 90)
+    plt.title('Profit by months',fontsize = 20,pad=30)
     plt.grid(axis='x')
-    plt.text(25.5,470000,'average line',color = color1,fontsize = 15)
+    plt.text(25.5,470000,'Average line',color = ColorSelect[3],fontsize = 17)
     plt.savefig('area.png')
     plt.cla()
 
