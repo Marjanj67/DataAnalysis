@@ -9,9 +9,9 @@ import seaborn  as sns
 ColorSelect = sns.color_palette('Set3',10)
 
 def plot_market_segment(df):
-    marketSegment = df.groupby(['market_segment'],as_index=False).count()
+    MarketSegment = df.groupby(['market_segment'],as_index=False).count()
     fig , ax = plt.subplots(1,1)
-    bars = ax.bar(marketSegment['market_segment'],marketSegment['hotel'] ,color = ColorSelect[0])
+    Bars = ax.bar(MarketSegment['market_segment'],MarketSegment['hotel'] ,color = ColorSelect[0])
     plt.xticks(rotation = 45)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -19,7 +19,7 @@ def plot_market_segment(df):
     ax.set_xlabel('Type of reservation', fontsize = 14)
     ax.set_ylabel('Count', fontsize = 14)
     ax.tick_params(length = 0)
-    ax.bar_label(bars)
+    ax.bar_label(Bars)
     fig.set_size_inches(14,12)
     fig.savefig('bar.png')
     ax.cla()
@@ -40,26 +40,25 @@ def plot_distribution_channel(df):
 
 def plot_time_price(df):
     pd.options.mode.chained_assignment = None
-    # df.replace(df['adr'].max(),df['adr'].mean(),inplace=True)
-    rooms = df['reserved_room_type']
-    roomsU = rooms.drop_duplicates()
-    colors = {}
+    Rooms = df['reserved_room_type']
+    RoomsUnique = Rooms.drop_duplicates()
+    ColorsMap = {}
     i = 1
-    for r in roomsU:
-        colorTemp = sns.color_palette('Set3',11)[i]
-        colorTemp = mpl.colors.to_hex(colorTemp)
-        colors[r] = colorTemp
+    for r in RoomsUnique:
+        ColorTemp = sns.color_palette('Set3',11)[i]
+        ColorTemp = mpl.colors.to_hex(ColorTemp)
+        ColorsMap[r] = ColorTemp
         i += 1
 
 
-    df.replace({'reserved_room_type':colors},inplace=True)
+    df.replace({'reserved_room_type':ColorsMap},inplace=True)
     plt.figure(figsize=(14,12))
-    n = 0
-    for ColorTemp in colors.values():
-        room = list(colors.keys())[n]
+    Iter = 0
+    for ColorTemp in ColorsMap.values():
+        Room = list(ColorsMap.keys())[Iter]
         dfTemp = df[(df['reserved_room_type']== ColorTemp)]
-        plt.scatter(dfTemp['lead_time'],dfTemp['adr'],c = ColorTemp,label=room)
-        n += 1
+        plt.scatter(dfTemp['lead_time'],dfTemp['adr'],c = ColorTemp,label=Room)
+        Iter += 1
     plt.gca().spines['top'].set_visible(False)
     plt.gca().spines['right'].set_visible(False)
     plt.title('Effect of the lead  time on price per room', fontsize = 20)
@@ -72,23 +71,25 @@ def plot_time_price(df):
     plt.cla()
 
 def plot_meal(df):
-    ml = df.groupby(by = 'meal',as_index=False).count()
-    ml = ml.loc[:,['meal','hotel']]
-    plt.pie(ml['hotel'],labels=ml['meal'],autopct='%0.f%%',shadow=True,explode=[0,0,0,0.5,0],startangle=-130,colors=ColorSelect)
-    plt.title('Type of meal')
+    MealsData = df.groupby(by = 'meal',as_index=False).count()
+    MealsData = MealsData.loc[:,['meal','hotel']]
+    plt.figure(figsize=(14,12))
+    plt.pie(MealsData['hotel'],labels= MealsData['meal'],autopct='%0.f%%',shadow=True,explode=[0,0,0,0.5,0],startangle=-130,colors=ColorSelect, textprops={'fontsize': 14})
+    plt.title('Type of meal', fontsize=20)
     plt.text(0.7,-1.2,
             "Type of meal booked. :\nUndefined/SC :no meal package\nBB : Bed & Breakfast\nHB : Half board \nFB : Full board",verticalalignment='bottom', horizontalalignment='left',
-            color='#000000', fontsize=8)
+            color='#000000', fontsize=15)
+    
     plt.savefig('pie.png')
     plt.cla()
 
 def plot_month_profit(df):
     df['monthYear'] = df['arrival_date_year'].astype(str) +'-'+df['arrival_date_month']
-    years = df.groupby(by = df['monthYear'] ,as_index=False).sum()
-    av = df.groupby(by = df['monthYear'],as_index=0).sum()
-    avr = av['adr'].mean()
+    YearsData = df.groupby(by = df['monthYear'] ,as_index=False).sum()
+    MeansMonth = df.groupby(by = df['monthYear'],as_index=0).sum()
+    MeanTotal = MeansMonth['adr'].mean()
     plt.figure(figsize=(14,12))
-    plt.fill_between(years['monthYear'],years['adr'],y2 = avr,color = ColorSelect[0])
+    plt.fill_between(YearsData['monthYear'],YearsData['adr'],y2 = MeanTotal,color = ColorSelect[0])
     plt.xticks(rotation = 90)
     plt.title('Profit by months',fontsize = 20,pad=30)
     plt.grid(axis='x')
@@ -107,11 +108,11 @@ def main():
     data = pd.read_csv('hotel_bookings.csv')
     df = pd.DataFrame(data)
     cleaning_data(df)
-    plot_market_segment(df)         # bar chart
-    plot_distribution_channel(df)   # ----------boxplot
-    plot_time_price(df)             #----- scatter chart
-    plot_meal(df)                   # --------------------pie chart
-    plot_month_profit(df)           # ----------------------- area chart
+    plot_market_segment(df)         # Bar chart
+    plot_distribution_channel(df)   # Boxplot
+    plot_time_price(df)             # Scatter chart
+    plot_meal(df)                   # Pie chart
+    plot_month_profit(df)           # Area chart
  
  
 
