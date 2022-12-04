@@ -1,15 +1,59 @@
 # visualisation practice with python
+This project shows my skills in drawing plots with python.
+
+
+## Dataset Information from kaggle
+[link](https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand)
+### Context
+Have you ever wondered when the best time of year to book a hotel room is? Or the optimal length of stay in order to get the best daily rate? What if you wanted to predict whether or not a hotel was likely to receive a disproportionately high number of special requests?\
+This hotel booking dataset can help you explore those questions!
+### Content
+This data set contains booking information for a city hotel and a resort hotel, and includes information such as when the booking was made, length of stay, the number of adults, children, and/or babies, and the number of available parking spaces, among other things.\
+All personally identifying information has been removed from the data.
+
+## Codes
+
+### Importing libraries
+In this practice i use matplotlib and seaborn libraries to create plots.
 ```
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import pandas as pd
 import numpy as np
 import seaborn  as sns
+```
 
 
-
+### selecting color palate
+```
 ColorSelect = sns.color_palette('Set3',10)
+```
+### Main function
+```
+def main():
+    data = pd.read_csv('hotel_bookings.csv')
+    df = pd.DataFrame(data)
+    cleaning_data(df)
+    plot_market_segment(df)         # Bar chart
+    plot_distribution_channel(df)   # Boxplot
+    plot_time_price(df)             # Scatter chart
+    plot_meal(df)                   # Pie chart
+    plot_month_profit(df)           # Area chart
 
+```
+
+### Cleaning data function
+```
+def cleaning_data(df):
+    df.replace(df['adr'].max(),df['adr'].mean(),inplace=True)
+    return df
+```
+
+
+### First plot (bar chart)
+
+
+```
 def plot_market_segment(df):
     MarketSegment = df.groupby(['market_segment'],as_index=False).count()
     fig , ax = plt.subplots(1,1)
@@ -25,7 +69,11 @@ def plot_market_segment(df):
     fig.set_size_inches(14,12)
     fig.savefig('bar.png')
     ax.cla()
+```
 
+### Boxplot for different distribution channels
+
+```
 
 def plot_distribution_channel(df):
     plt.figure(figsize=(14,12))
@@ -39,7 +87,11 @@ def plot_distribution_channel(df):
     sns.despine(right=True,top=True)
     plt.savefig('boxplot.png')
     plt.cla()
+```
 
+### Scatter plot for profit based on lead time
+
+```
 def plot_time_price(df):
     pd.options.mode.chained_assignment = None
     Rooms = df['reserved_room_type']
@@ -71,7 +123,11 @@ def plot_time_price(df):
     plt.legend()
     plt.savefig('scatter.png')
     plt.cla()
+```
 
+### Pie chart for types of meals
+
+```
 def plot_meal(df):
     MealsData = df.groupby(by = 'meal',as_index=False).count()
     MealsData = MealsData.loc[:,['meal','hotel']]
@@ -84,7 +140,11 @@ def plot_meal(df):
     
     plt.savefig('pie.png')
     plt.cla()
+```
 
+### Area chart for profit in different months
+
+```
 def plot_month_profit(df):
     df['monthYear'] = df['arrival_date_year'].astype(str) +'-'+df['arrival_date_month']
     YearsData = df.groupby(by = df['monthYear'] ,as_index=False).sum()
@@ -98,29 +158,5 @@ def plot_month_profit(df):
     plt.text(25.5,470000,'Average line',color = ColorSelect[3],fontsize = 17)
     plt.savefig('area.png')
     plt.cla()
-
-
-def cleaning_data(df):
-    df.replace(df['adr'].max(),df['adr'].mean(),inplace=True)
-    return df
-
-
-def main():
-    global df
-    data = pd.read_csv('hotel_bookings.csv')
-    df = pd.DataFrame(data)
-    cleaning_data(df)
-    plot_market_segment(df)         # Bar chart
-    plot_distribution_channel(df)   # Boxplot
-    plot_time_price(df)             # Scatter chart
-    plot_meal(df)                   # Pie chart
-    plot_month_profit(df)           # Area chart
- 
- 
-
-
-
-if __name__ == "__main__":
-  main();
   
   ```
