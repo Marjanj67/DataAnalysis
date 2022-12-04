@@ -70,6 +70,12 @@ def plot_market_segment(df):
     fig.savefig('bar.png')
     ax.cla()
 ```
+ 
+
+<p align="center">
+  <img width = "80%" src="https://github.com/Marjanj67/DataAnalysis/blob/0f8ea82645db90f3ea5e94d95baec028480e654f/Visualisation/bar.png" />
+</p>
+
 
 ### Boxplot for different distribution channels
 
@@ -88,7 +94,9 @@ def plot_distribution_channel(df):
     plt.savefig('boxplot.png')
     plt.cla()
 ```
-
+<p align="center">
+  <img width = "80%" src="https://github.com/Marjanj67/DataAnalysis/blob/0f8ea82645db90f3ea5e94d95baec028480e654f/Visualisation/boxplot.png" />
+</p>
 ### Scatter plot for profit based on lead time
 
 ```
@@ -124,7 +132,9 @@ def plot_time_price(df):
     plt.savefig('scatter.png')
     plt.cla()
 ```
-
+<p align="center">
+  <img width = "80%" src="https://github.com/Marjanj67/DataAnalysis/blob/0f8ea82645db90f3ea5e94d95baec028480e654f/Visualisation/scatter.png" />
+</p>
 ### Pie chart for types of meals
 
 ```
@@ -141,7 +151,9 @@ def plot_meal(df):
     plt.savefig('pie.png')
     plt.cla()
 ```
-
+<p align="center">
+  <img width = "80%" src="https://github.com/Marjanj67/DataAnalysis/blob/0f8ea82645db90f3ea5e94d95baec028480e654f/Visualisation/pie.png" />
+</p>
 ### Area chart for profit in different months
 
 ```
@@ -160,3 +172,6 @@ def plot_month_profit(df):
     plt.cla()
   
   ```
+<p align="center">
+  <img width = "80%" src="https://github.com/Marjanj67/DataAnalysis/blob/0f8ea82645db90f3ea5e94d95baec028480e654f/Visualisation/area.png" />
+</p>
