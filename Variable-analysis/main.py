@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import numpy as np
 
 colors = sns.color_palette('Set2',10)
 def clean_data(df):
@@ -53,18 +53,22 @@ def plot_scatter(dfClean):
     # plt.show()
 
 def correlation_matrix(dfClean):
-    CorrelationMatrix = dfClean.corr(method='pearson')
+    CorrelationMatrix = dfClean.corr(method='pearson',numeric_only = True)
     CorrelationMatrix.to_csv('CorrelationMatrix.csv')
 
 def plot_heatmap(dfClean):
-    CovMatrix = dfClean.cov()
+    CovMatrix = dfClean.cov(numeric_only = True)
     # CovMatrix.to_csv('CovMatrix.csv')
     fig , ax = plt.subplots()
     ax.imshow(CovMatrix)
     Variables = CovMatrix.columns.values
-    ax.set_xticks(ticks = range(0,len(Variables)),labels = Variables,rotation = 45)
+    ax.set_title('Heatmap for variabes',fontsize = 18)
+    ax.set_xticks(ticks = range(0,len(Variables)),labels = Variables,rotation = 45,ha = 'right')
     ax.set_yticks(ticks = range(0,len(Variables)),labels = Variables)
-    fig.set_size_inches(10,10)
+    fig.set_size_inches(12,10)
+    for i in range(len(Variables)):
+        for j in range(len(Variables)):
+            ax.text(i-.1,j,np.around(CovMatrix.iloc[i,j],decimals = 1))
     fig.savefig('heatmap.png')
     # plt.show()
     
