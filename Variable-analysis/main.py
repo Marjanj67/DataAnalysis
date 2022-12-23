@@ -12,7 +12,6 @@ def clean_data(df):
                 'Explained by: Healthy life expectancy','Explained by: Freedom to make life choices',
                 'Explained by: Generosity',	'Explained by: Perceptions of corruption',	'Dystopia + residual']
     df.drop(columns = Unwanted,inplace = True)
-    print(df.head(5))
     Describe = df.describe()  # Everything is in order
     Describe.to_csv('Describe.csv') 
     return df
@@ -81,4 +80,5 @@ def main ():
 
 
 
-main ()
+if __name__ == "__main__":
+  main();
