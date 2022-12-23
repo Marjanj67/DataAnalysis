@@ -50,7 +50,6 @@ def plot_scatter(dfClean):
     ax[1,2].set_ylabel('Perceptions of corruption')
     fig.set_size_inches(15,10)
     fig.savefig('scatter.png')
-    # plt.show()
 
 def correlation_matrix(dfClean):
     CorrelationMatrix = dfClean.corr(method='pearson',numeric_only = True)
@@ -62,7 +61,7 @@ def plot_heatmap(dfClean):
     fig , ax = plt.subplots()
     ax.imshow(CovMatrix)
     Variables = CovMatrix.columns.values
-    ax.set_title('Heatmap for variabes',fontsize = 18)
+    ax.set_title('Heatmap for variabes',fontsize = 18 ,pad=18)
     ax.set_xticks(ticks = range(0,len(Variables)),labels = Variables,rotation = 45,ha = 'right')
     ax.set_yticks(ticks = range(0,len(Variables)),labels = Variables)
     fig.set_size_inches(12,10)
@@ -70,14 +69,13 @@ def plot_heatmap(dfClean):
         for j in range(len(Variables)):
             ax.text(i-.1,j,np.around(CovMatrix.iloc[i,j],decimals = 1))
     fig.savefig('heatmap.png')
-    # plt.show()
     
 def main ():
     data = pd.read_csv('world-happiness-report-2021.csv')
     df = pd.DataFrame(data)
     dfClean = clean_data(df)
-    # dfClean.to_csv('dfClean.csv') 
-    # plot_scatter(dfClean)
+    dfClean.to_csv('dfClean.csv') 
+    plot_scatter(dfClean)
     correlation_matrix(dfClean)
     plot_heatmap(dfClean)
 
