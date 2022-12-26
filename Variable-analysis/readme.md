@@ -9,12 +9,17 @@ In this project i explore the relationship between variables in a dataset.
 
 
 ## The code
+
+### importing libraries
 ```
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+```
 
+
+```
 colors = sns.color_palette('Set2',10)
 def clean_data(df):
     ListVariables = df.columns.values
