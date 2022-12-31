@@ -19,6 +19,21 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 ```
+
+### The main function 
+
+```
+def main ():
+    data = pd.read_csv('world-happiness-report-2021.csv')
+    df = pd.DataFrame(data)
+    dfClean = clean_data(df)
+    dfClean.to_csv('dfClean.csv') 
+    plot_scatter(dfClean)
+    correlation_matrix(dfClean)
+    plot_heatmap(dfClean)
+
+```
+
 ### Data preparing
 This data has some Columns that are not useful and will be deleted in cleaning process.
 
@@ -74,13 +89,16 @@ def plot_scatter(dfClean):
     fig.savefig('scatter.png')
 ```
 This scatter plot has 6 subplots and shows relationship between 6 variables and the main variables.
-### matrix 
-
+### Create correlation matrix
+Correlation matrix helps us understand the strength of relationship between variables.
 ```
 def correlation_matrix(dfClean):
     CorrelationMatrix = dfClean.corr(method='pearson',numeric_only = True)
     CorrelationMatrix.to_csv('CorrelationMatrix.csv')
-
+```
+### Covariance matrix and heat map
+This matrix ...
+```
 def plot_heatmap(dfClean):
     CovMatrix = dfClean.cov(numeric_only = True)
     # CovMatrix.to_csv('CovMatrix.csv')
@@ -95,19 +113,4 @@ def plot_heatmap(dfClean):
         for j in range(len(Variables)):
             ax.text(i-.1,j,np.around(CovMatrix.iloc[i,j],decimals = 1))
     fig.savefig('heatmap.png')
-    
-def main ():
-    data = pd.read_csv('world-happiness-report-2021.csv')
-    df = pd.DataFrame(data)
-    dfClean = clean_data(df)
-    dfClean.to_csv('dfClean.csv') 
-    plot_scatter(dfClean)
-    correlation_matrix(dfClean)
-    plot_heatmap(dfClean)
-
-
-
-if __name__ == "__main__":
-  main();
-
 ```
