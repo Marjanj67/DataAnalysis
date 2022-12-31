@@ -2,7 +2,9 @@
 In this project i explore the relationship between variables in a dataset.
 
 
-
+## Data description
+Data link from kaggle
+...
 
 
 
@@ -17,7 +19,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 ```
-
+### Data preparing
+This data has some Columns that are not useful and will be deleted in cleaning process.
 
 ```
 colors = sns.color_palette('Set2',10)
