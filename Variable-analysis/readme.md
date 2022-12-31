@@ -35,7 +35,10 @@ def clean_data(df):
     Describe = df.describe()  # Everything is in order
     Describe.to_csv('Describe.csv') 
     return df
-
+```
+### scatter plot
+Drawing a scatter plot shows the relationship between variables. 
+```
 def plot_scatter(dfClean):
     fig , ax = plt.subplots(2,3)
     ax[0,0].scatter(dfClean['Ladder score'],dfClean['Logged GDP per capita'],c = colors[0])
@@ -69,7 +72,11 @@ def plot_scatter(dfClean):
     ax[1,2].set_ylabel('Perceptions of corruption')
     fig.set_size_inches(15,10)
     fig.savefig('scatter.png')
+```
+This scatter plot has 6 subplots and shows relationship between 6 variables and the main variables.
+### matrix 
 
+```
 def correlation_matrix(dfClean):
     CorrelationMatrix = dfClean.corr(method='pearson',numeric_only = True)
     CorrelationMatrix.to_csv('CorrelationMatrix.csv')
