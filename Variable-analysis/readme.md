@@ -21,6 +21,8 @@ import numpy as np
 ```
 
 ### The main function 
+In the main function, after importing the data and creating a data frame, cleaning function is called.
+Then cleaned data frame is saved in a CSV file. This data is then used in functions to find the relationship between variables.
 
 ```
 def main ():
@@ -36,7 +38,7 @@ def main ():
 
 ### Data preparing
 This data has some Columns that are not useful and will be deleted in cleaning process.
-
+After that I made sure there is no error or missing value using the described method.
 ```
 colors = sns.color_palette('Set2',10)
 def clean_data(df):
