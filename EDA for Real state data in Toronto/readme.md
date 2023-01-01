@@ -115,7 +115,7 @@ df.describe()
 ## Plotting data
 plotting data is a tool for understanding the data and finding patterns. In this project we use several charts.
 ### horizental bar chart
-One of the most important features in our data is location of the property, so i draw a horizontal bar chart that shows locations ffrom most expensive to the least expensive
+One of the most important features in our data is location of the property, so i draw a horizontal bar chart that shows locations from most expensive to the least expensive
 ```
 def plot_price_nei(df):
     PlotYear = '2021'
