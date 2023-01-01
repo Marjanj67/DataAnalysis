@@ -40,6 +40,7 @@ The clean dataset:
   <img src="https://github.com/Marjanj67/DataAnalysis/blob/571a9ef0c3b5774934422d62381a0266ada5ad92/Cleaning%20messy%20data/cleaneddata.PNG" />
 </p>
 ## Importing second dataset
+
 ```
 #------Imdb data
 data1 = pd.read_csv('imdb_top_1000.csv')
