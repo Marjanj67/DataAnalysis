@@ -29,6 +29,8 @@ import seaborn  as sns
 ColorSelect = sns.color_palette('Set3',10)
 ```
 ### Main function
+Main function consists of cleaning and plotting the data.
+
 ```
 def main():
     data = pd.read_csv('hotel_bookings.csv')
@@ -43,6 +45,7 @@ def main():
 ```
 
 ### Cleaning data function
+There is an outlier value which is replaced with average of the column.
 ```
 def cleaning_data(df):
     df.replace(df['adr'].max(),df['adr'].mean(),inplace=True)
@@ -51,7 +54,7 @@ def cleaning_data(df):
 
 
 ### First plot (bar chart)
-
+This plot shows revenue based on market segment.
 
 ```
 def plot_market_segment(df):
@@ -78,7 +81,7 @@ def plot_market_segment(df):
 
 
 ### Boxplot for different distribution channels
-
+In this boxplot I show the relationship between revenue and distribution channels.
 ```
 
 def plot_distribution_channel(df):
