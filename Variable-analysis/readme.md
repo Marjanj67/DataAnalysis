@@ -116,3 +116,4 @@ def plot_heatmap(dfClean):
             ax.text(i-.1,j,np.around(CovMatrix.iloc[i,j],decimals = 1))
     fig.savefig('heatmap.png')
 ```
+Based on this heat map the ...
