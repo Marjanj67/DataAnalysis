@@ -130,9 +130,11 @@ def plot_scatter(dfClean):
     fig.savefig('scatter.png')
 ```
 This scatter plot has 6 subplots and shows relationship between 6 variables and the main variables.
-As shown in this plots 
+As shown in this plots 4 variables have positive correlation, one variables has negative correlation and for generosity no obvious pattern is seen.
+
 ### Create correlation matrix
-Correlation matrix helps us understand the strength of relationship between variables.
+Correlation matrix helps us understand the strength of relationship between variables.\
+This matrix shows the same result as the scatter plot.
 ```
 def correlation_matrix(dfClean):
     CorrelationMatrix = dfClean.corr(method='pearson',numeric_only = True)
