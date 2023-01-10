@@ -141,7 +141,7 @@ def correlation_matrix(dfClean):
     CorrelationMatrix.to_csv('CorrelationMatrix.csv')
 ```
 ### Covariance matrix and heat map
-This matrix 
+This matrix result shows relationship between variables.
 ```
 def plot_heatmap(dfClean):
     CovMatrix = dfClean.cov(numeric_only = True)
@@ -158,4 +158,5 @@ def plot_heatmap(dfClean):
             ax.text(i-.1,j,np.around(CovMatrix.iloc[i,j],decimals = 1))
     fig.savefig('heatmap.png')
 ```
-Based on this heat map the ...
+## The end
+This little analysis was to show the relationship between variables. It will be updated with further analysis in the future 
