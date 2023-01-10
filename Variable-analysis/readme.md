@@ -159,4 +159,4 @@ def plot_heatmap(dfClean):
     fig.savefig('heatmap.png')
 ```
 ## The end
-This little analysis was to show the relationship between variables. It will be updated with further analysis in the future 
+This little analysis was to show the relationship between variables. Covariance matrix is usually used in machine learning algorithms. there is no further analysis for now.
