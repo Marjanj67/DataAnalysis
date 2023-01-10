@@ -23,6 +23,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import geopandas as gpd
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 ```
 
 ### The main function 
@@ -57,6 +59,37 @@ def clean_data(df):
     Describe = df.describe()  # Everything is in order
     Describe.to_csv('Describe.csv') 
     return df
+```
+### Mapping the data
+I mapped the data using geopandas.
+```
+def plot_map(dfClean):
+    countries = gpd.read_file(
+               gpd.datasets.get_path("naturalearth_lowres"))
+    dfTemp = dfClean.loc[:,['Country name', 'Ladder score']]
+    dfTemp = dfTemp.sort_values('Ladder score')
+
+    # before merging name of some countries need to change
+    us = dfTemp[dfTemp['Country name']=='United States'].index.values[0]
+    dfTemp.at[us,'Country name'] = 'United States of America'
+    dr = dfTemp[dfTemp['Country name']=='Dominican Republic'].index.values[0]
+    dfTemp.at[dr,'Country name'] = 'Dominican Rep.'
+
+    MergedData = pd.merge(countries,dfTemp, how = "outer",left_on='name',right_on='Country name')
+    MergedData.loc[:,['Ladder score']] = MergedData.loc[:,['Ladder score']].fillna('2')
+    MergedData['Ladder score'] = pd.to_numeric(MergedData['Ladder score'])
+    fig, ax = plt.subplots(figsize=(8,6))
+    divider = make_axes_locatable(ax)
+
+    cax = divider.append_axes("right", size="5%", pad=0.1)
+    MyMap = MergedData.plot(column = 'Ladder score' , cmap = 'Greens',ax = ax, legend=True, cax=cax)
+    ax.set_title('Map of happiness')
+    ax.text(-200,-130,'* Based on data from 2021')
+    ax.text(-200,-145,'* Data for the white countries is not available')
+    ax.text(-200,-160,'* Darker color means happier')
+    MyMap.set_facecolor('#ADD8E6')
+    fig.savefig('map.png')
+
 ```
 ### scatter plot
 Drawing a scatter plot shows the relationship between variables. 
