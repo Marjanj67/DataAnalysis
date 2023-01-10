@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://scdcentre.com/wp-content/uploads/the-psychology-of-happiness.jpg" />
+</p>
+
 # Variable analysis
 In this project, i explore the relationship between variables in a dataset.
 
@@ -92,6 +96,10 @@ def plot_map(dfClean):
     fig.savefig('map.png')
 
 ```
+<p align="center">
+  <img src="https://github.com/Marjanj67/DataAnalysis/blob/b79d98e0bbe28e2ffec12c4076f089a14155ce1b/Variable-analysis/map.png" />
+</p>
+
 ### scatter plot
 Drawing a scatter plot shows the relationship between variables. 
 ```
@@ -129,6 +137,9 @@ def plot_scatter(dfClean):
     fig.set_size_inches(15,10)
     fig.savefig('scatter.png')
 ```
+<p align="center">
+  <img src="https://github.com/Marjanj67/DataAnalysis/blob/b79d98e0bbe28e2ffec12c4076f089a14155ce1b/Variable-analysis/scatter.png" />
+</p>
 This scatter plot has 6 subplots and shows relationship between 6 variables and the main variables.
 As shown in this plots 4 variables have positive correlation, one variables has negative correlation and for generosity no obvious pattern is seen.
 
@@ -140,6 +151,10 @@ def correlation_matrix(dfClean):
     CorrelationMatrix = dfClean.corr(method='pearson',numeric_only = True)
     CorrelationMatrix.to_csv('CorrelationMatrix.csv')
 ```
+<p align="center">
+  <img src="https://github.com/Marjanj67/DataAnalysis/blob/b79d98e0bbe28e2ffec12c4076f089a14155ce1b/Variable-analysis/corr.PNG" />
+</p>
+
 ### Covariance matrix and heat map
 This matrix result shows relationship between variables.
 ```
@@ -158,5 +173,11 @@ def plot_heatmap(dfClean):
             ax.text(i-.1,j,np.around(CovMatrix.iloc[i,j],decimals = 1))
     fig.savefig('heatmap.png')
 ```
+<p align="center">
+  <img src="https://github.com/Marjanj67/DataAnalysis/blob/b79d98e0bbe28e2ffec12c4076f089a14155ce1b/Variable-analysis/cov.PNG" />
+</p>
+<p align="center">
+  <img src="https://github.com/Marjanj67/DataAnalysis/blob/b79d98e0bbe28e2ffec12c4076f089a14155ce1b/Variable-analysis/heatmap.png" />
+</p>
 ## The end
 This little analysis was to show the relationship between variables. Covariance matrix is usually used in machine learning algorithms. there is no further analysis for now.
