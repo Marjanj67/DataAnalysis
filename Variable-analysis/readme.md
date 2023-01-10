@@ -179,5 +179,6 @@ def plot_heatmap(dfClean):
 <p align="center">
   <img src="https://github.com/Marjanj67/DataAnalysis/blob/b79d98e0bbe28e2ffec12c4076f089a14155ce1b/Variable-analysis/heatmap.png" />
 </p>
+
 ## The end
 This little analysis was to show the relationship between variables. Covariance matrix is usually used in machine learning algorithms. there is no further analysis for now.
