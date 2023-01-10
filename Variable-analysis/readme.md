@@ -134,14 +134,14 @@ As shown in this plots 4 variables have positive correlation, one variables has 
 
 ### Create correlation matrix
 Correlation matrix helps us understand the strength of relationship between variables.\
-This matrix shows the same result as the scatter plot.
+This matrix shows the same result as the scatter plot. In the first column we see positive correlation for first four variables (more than 0.5) and negative correlation for last variables. Correlation between ladder score and generosity is almost zero that shows no obvious correlation.
 ```
 def correlation_matrix(dfClean):
     CorrelationMatrix = dfClean.corr(method='pearson',numeric_only = True)
     CorrelationMatrix.to_csv('CorrelationMatrix.csv')
 ```
 ### Covariance matrix and heat map
-This matrix ...
+This matrix 
 ```
 def plot_heatmap(dfClean):
     CovMatrix = dfClean.cov(numeric_only = True)
