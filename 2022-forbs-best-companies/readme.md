@@ -55,3 +55,7 @@ def plot_bar(CleanedData):
 
 
 ```
+<p align="center">
+  <img src="https://github.com/Marjanj67/DataAnalysis/blob/3e672a1d60a0767b166609072d97d0466b29c8a7/2022-forbs-best-companies/barhfinal.png" />
+</p>
+
