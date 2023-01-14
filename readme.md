@@ -7,7 +7,7 @@ These are self created using free dtasets on the web, since I cannot publish any
 [2. Visualisation for hotel booking dataset](Visualisation/readme.md)\
 [3. Variable-analysis](Variable-analysis/readme.md)\
 [4. EDA for Real state data in Toronto](https://github.com/Marjanj67/DataAnalysis/blob/6e30a5de579c351abb3b90ec71d5908d7425d4f4/EDA%20for%20Real%20state%20data%20in%20Toronto/readme.md)\
-[5. EDA for Real state data in Toronto](2022-forbs-best-companies/readme.md)\
+[5. 2022 forbs top companies](2022-forbs-best-companies/readme.md)\
 Each project is explained in more detail in their own readme file.
 
 
