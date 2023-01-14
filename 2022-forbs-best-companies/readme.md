@@ -1,7 +1,33 @@
 # Best companies of 2022
 ## Dataset
 link from kaggle
+https://www.kaggle.com/datasets/rakkesharv/forbes-2000-global-companies
 
+### Forbes 2000 Global Companies
+#### About Dataset
+This is a webscrapped dataset containing Top 2000 Companies which are ranked by by using four metrics which are their sales, profits, assets, and market value. It has the 11 columns of data and they are:
+
+2022 Ranking : Organization's Current Year Ranking
+
+Organization Name : Name of the Organization
+
+Industry : The industry type the Organization mainly deals with.
+
+Country : Country of Origin
+
+Year Founded : Year in which the Organization Founded
+
+CEO : CEO of the Organization
+
+Revenue (Billions) : Revenue made in the current year
+
+Profits (Billions) : Profits made in the current year
+
+Assets (Billions) : Assets made in the current year
+
+Market Value (Billions) : Market Value as in current year
+
+Total Employees : Total Number of working employees
 
 ## The code 
 ### Importing libraries
