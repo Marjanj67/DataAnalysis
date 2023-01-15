@@ -38,6 +38,7 @@ import seaborn as sns
 
 ```
 ### Main function
+Cleaning data and plotting
 ```
 
 colors = sns.color_palette('flare',32)
