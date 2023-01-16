@@ -68,6 +68,7 @@ def data_cleaning(df):
 
 ```
 ### ploting horizontal bar chart
+In this chart I plot top 30 companies with their revenue to show that revenue alone is not a factor for being a top company.
 ```
 def plot_bar(CleanedData):
     fig , ax = plt.subplots(figsize =(12,10) )
