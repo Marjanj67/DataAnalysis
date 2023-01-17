@@ -51,6 +51,7 @@ def main():
 
 ```
 ### Data cleaning and formating
+The dataset contains top 2000 companies and we only want the firdt 30.
 ```
 def data_cleaning(df):
     # Drop 31 to 200
