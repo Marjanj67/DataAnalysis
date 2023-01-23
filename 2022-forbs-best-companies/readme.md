@@ -44,9 +44,9 @@ Cleaning data and plotting
 colors = sns.color_palette('flare',32)
 def main():
     data = pd.read_csv('Forbes_2000_top_company_CLNQ11.csv')
-    df = pd.DataFrame(data)
-    CleanedData = data_cleaning(df)
-    plot_bar(CleanedData)
+    df = pd.DataFrame(data)  # converting data to Dataframe
+    CleanedData = data_cleaning(df) # cleaning data function
+    plot_bar(CleanedData) # plotting bar plot
 
 
 ```
