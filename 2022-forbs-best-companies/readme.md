@@ -57,8 +57,8 @@ def data_cleaning(df):
     # Drop 31 to 200
     df = df.iloc[0:30,:]
     df['order'] = df.loc[:,'2022 Ranking']
-    df.sort_values('2022 Ranking',inplace = True, ascending = False)
-    df.at[0,'order'] = 'First'
+    df.sort_values('2022 Ranking',inplace = True, ascending = False)  # sorting the dataframe
+    df.at[0,'order'] = 'First'  # assigning value to order colums
     df.at[1,'order'] = 'Second'
     df.at[2,'order'] = 'Third'
     for iter in range(3,30):
