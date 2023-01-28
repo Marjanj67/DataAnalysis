@@ -6,7 +6,7 @@ import seaborn as sns
 
 colors = sns.color_palette('flare',32)
 def main():
-    data = pd.read_csv('Forbes_2000_top_company_CLNQ11.csv')
+    data = pd.read_csv('Forbes_2000_top_company_CLNQ11.csv')  # Load data
     df = pd.DataFrame(data)
     CleanedData = data_cleaning(df)
     plot_bar(CleanedData)
