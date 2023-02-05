@@ -3,7 +3,7 @@
 </p>
 
 # Variable analysis
-In this project, i explore the relationship between variables in a dataset.
+In this project, i explore the relationship between variables in a dataset. This dataset is about happiness in different countries.
 
 
 ## Data description
