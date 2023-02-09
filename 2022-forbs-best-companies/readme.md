@@ -76,7 +76,7 @@ def plot_bar(CleanedData):
     CleanedData.sort_values('2022 Ranking',inplace = True, ascending = False)
     bars = ax.barh(CleanedData['order'],CleanedData['Revenue (Billions)'],color = colors)
     ax.set_title('30 top companies revenue')
-    plt.bar_label(bars,fontsize = 7,fmt = '%d')
+    plt.bar_label(bars,fontsize = 7,fmt = '%d')  # Print bar labels
     ax.set_xlabel('Revenue (Billion dollar)')
     fig.savefig('barh.png') # saving the chart
 ```
