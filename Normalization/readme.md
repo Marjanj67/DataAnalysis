@@ -63,5 +63,5 @@ plt.show()
 
 ```
 ## The result
-
+![](https://github.com/Marjanj67/DataAnalysis/blob/19ab349a6e8adea6817d25d812687c956f7c2856/Normalization/norm.png)
 
