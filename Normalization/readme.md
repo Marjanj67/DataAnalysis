@@ -45,21 +45,22 @@ data1Norm = scaler.fit_transform(data1.reshape(-1,1))
 data2Norm = scaler.fit_transform(data2.reshape(-1,1))
 ax[0,3].hist(data1Norm,color = '#d13232')
 ax[0,3].set_title('RobustScaler')
-ax[0,3].set_xlim(0,5)
+ax[0,3].set_xlim(-5,5)
 ax[1,3].hist(data2Norm,color = '#d13232')
-ax[1,3].set_xlim(0,5)
+ax[1,3].set_xlim(-5,5)
 # StandardScaler
 scaler = StandardScaler()
 data1Norm = scaler.fit_transform(data1.reshape(-1,1))
 data2Norm = scaler.fit_transform(data2.reshape(-1,1))
 ax[0,4].hist(data1Norm,color = '#8f32d1')
-ax[0,4].set_xlim(0,5)
+ax[0,4].set_xlim(-5,5)
 ax[0,4].set_title('StandardScaler')
 ax[1,4].hist(data2Norm,color = '#8f32d1')
-ax[1,4].set_xlim(0,5)
+ax[1,4].set_xlim(-5,5)
 
 fig.savefig("norm.png")
 plt.show()
+
 
 ```
 ## The result
