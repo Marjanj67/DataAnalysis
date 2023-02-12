@@ -11,7 +11,7 @@ data2[20] = 17
 # x = np.linspace(data1.mean(), data1.max(), 1000)
 
 fig , ax = plt.subplots(2,5)
-fig.set_size_inches(10,7)
+fig.set_size_inches(12,7)
 fig.suptitle('Different types of normalization for data')
 ax[0,0].hist(data1,color = "skyblue")
 ax[0,0].set_title('Original data')
