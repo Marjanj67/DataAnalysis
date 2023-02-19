@@ -1,10 +1,14 @@
 # Exploring different sampling methods
 ## The code
+This code has several parts:
+### Importing libraries
 ```
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+```
+### Create data function
+```
 def create_data(PopulationNumber):
     # create dataset
     Id = np.arange(PopulationNumber)
@@ -15,14 +19,18 @@ def create_data(PopulationNumber):
     data = {'Id':Id,'Eye color':Eye,'Age':Age,'Happy':Happy}
     population = pd.DataFrame(data)
     return population
-
+```
+### Simple random sampling function
+```
 def simple_random_sampling(population,PopulationNumber,SampleNumber):
     Id = np.arange(PopulationNumber)
     IdSample = np.random.choice(Id,SampleNumber,replace=False)   # Select random ids
     Sample = population.iloc[IdSample]
     return Sample
 
-
+```
+### Stratified sampling function
+```
 def stratified_sampling(population,PopulationNumber,SampleNumber):
     Factor = 'Eye'
     ClusterNumber = len(population['Eye color'].unique())
@@ -35,7 +43,10 @@ def stratified_sampling(population,PopulationNumber,SampleNumber):
         Ids = Ids + IdSample.tolist()
     Sample = population.iloc[Ids]
     return Sample
-    
+
+```
+### Cluster sampling function
+```    
 def cluster_sampling(population,PopulationNumber):
     Factor = 'Eye'
     ClusterNumber = len(population['Eye color'].unique())
@@ -45,7 +56,9 @@ def cluster_sampling(population,PopulationNumber):
             EyeColor = population['Eye color'].unique()[iter]
             Sample = population[population['Eye color']==EyeColor]
     return Sample
-
+```
+### Systematic random sampling function
+``` 
 def systematic_random_sampling(population,PopulationNumber,SampleNumber,Interval):
     Upper = PopulationNumber-(SampleNumber*Interval)
     First = np.random.randint(0,Upper,size = 1)
@@ -58,7 +71,9 @@ def systematic_random_sampling(population,PopulationNumber,SampleNumber,Interval
 
 
 
-
+```
+### plotting function
+``` 
 def plotting(population,SampleSimple,SampleSystematic,SampleStratified,SampleCluster):
     # ploting
     fig , ax = plt.subplots(1,5)
@@ -80,7 +95,9 @@ def plotting(population,SampleSimple,SampleSystematic,SampleStratified,SampleClu
     ax[4].set_title('Cluster sampling',color = '#4C5270')
     fig.savefig('sample.png')
     plt.show()
-
+```
+### Main function
+``` 
 def main():
     PopulationNumber = 500
     SampleNumber = int(PopulationNumber/5)
