@@ -17,6 +17,8 @@ data2[53] = 25
 data2[20] = 17
 # x = np.linspace(data1.mean(), data1.max(), 1000)
 ```
+# The main normalization code
+```
 fig , ax = plt.subplots(2,5)
 fig.set_size_inches(12,7)
 fig.suptitle('Different types of normalization for data')
