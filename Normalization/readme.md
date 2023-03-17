@@ -1,18 +1,22 @@
 # How to normalize data for machine learning and othe purposes
 ## THe code
+
+### Importing libraries
 ```
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import normalize,MinMaxScaler,RobustScaler,StandardScaler
 import matplotlib.pyplot as plt
-
+```
+### Creating dataset
+```
 #create dataset
 data1 = np.random.normal(5,2,100)
 data2 = np.random.randint(7,size=(100))
 data2[53] = 25
 data2[20] = 17
 # x = np.linspace(data1.mean(), data1.max(), 1000)
-
+```
 fig , ax = plt.subplots(2,5)
 fig.set_size_inches(12,7)
 fig.suptitle('Different types of normalization for data')
