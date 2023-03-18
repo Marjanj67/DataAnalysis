@@ -17,7 +17,7 @@ data2[53] = 25
 data2[20] = 17
 # x = np.linspace(data1.mean(), data1.max(), 1000)
 ```
-# The main normalization code
+### The main normalization code
 ```
 fig , ax = plt.subplots(2,5)
 fig.set_size_inches(12,7)
@@ -27,7 +27,7 @@ ax[0,0].set_title('Original data')
 ax[0,0].set_ylabel('Normal distribution data')
 ax[1,0].hist(data2,color = "skyblue")
 ax[1,0].set_ylabel('Random data')
-# normalize
+# normalize methode
 data1Norm = normalize([data1])
 data2Norm = normalize([data2])
 ax[0,1].hist(data1Norm[0],color = '#32a852')
@@ -35,7 +35,7 @@ ax[0,1].set_title('normalize')
 ax[0,1].set_xlim(0,1)
 ax[1,1].hist(data2Norm[0],color = '#32a852')
 ax[1,1].set_xlim(0,1)
-# MinMaxScaler
+# MinMaxScaler methode
 scaler = MinMaxScaler()
 data1Norm = scaler.fit_transform(data1.reshape(-1,1))
 data2Norm = scaler.fit_transform(data2.reshape(-1,1))
@@ -45,7 +45,7 @@ ax[0,2].set_title('MinMaxScaler')
 ax[1,2].hist(data2Norm,color = '#eddf3e')
 ax[1,2].set_xlim(0,1)
 
-# RobustScaler
+# RobustScaler methode
 scaler = RobustScaler()
 data1Norm = scaler.fit_transform(data1.reshape(-1,1))
 data2Norm = scaler.fit_transform(data2.reshape(-1,1))
@@ -54,7 +54,7 @@ ax[0,3].set_title('RobustScaler')
 ax[0,3].set_xlim(-5,5)
 ax[1,3].hist(data2Norm,color = '#d13232')
 ax[1,3].set_xlim(-5,5)
-# StandardScaler
+# StandardScaler methode
 scaler = StandardScaler()
 data1Norm = scaler.fit_transform(data1.reshape(-1,1))
 data2Norm = scaler.fit_transform(data2.reshape(-1,1))
