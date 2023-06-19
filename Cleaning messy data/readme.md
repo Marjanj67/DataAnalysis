@@ -27,8 +27,8 @@ if df['show_id'].is_unique == True:
     df.set_index('show_id',inplace=True)
 
 # Drop unnecessary columns
-ToDrop = ['date_added','duration']
-df.drop(columns=ToDrop,inplace=True)
+to_drop = ['date_added','duration']
+df.drop(columns=to_drop,inplace=True)
 
 # Remove duplicates
 df.drop_duplicates(inplace=True)
@@ -48,11 +48,11 @@ This dataset contains rating of the TV shows.
 data1 = pd.read_csv('imdb_top_1000.csv')
 df1 = pd.DataFrame(data1)
 # Find the title of columns
-ColumnsNames = df1.columns.values
+columns_names = df1.columns.values
 # We only need 'Series_Title' and 'IMDB_Rating'
-ColumnsNames = np.array(ColumnsNames)
-ColumnsDelete = np.delete(ColumnsNames,[1,6])
-df1.drop(columns = ColumnsDelete,inplace=True)
+columns_names = np.array(columns_names)
+columns_delete = np.delete(columns_names,[1,6])
+df1.drop(columns = columns_delete,inplace=True)
 #Changing the name of the columns
 df1.rename(columns={'Series_Title':'title'},inplace=True)
 ```
@@ -61,11 +61,11 @@ df1.rename(columns={'Series_Title':'title'},inplace=True)
 ```
 #-------joining two dataset
 # We want only values in the df that have an IMDB rating in df1
-JoinesData = pd.merge(df,df1,how='left', on = ['title'])
-JoinesData.dropna(inplace=True)
+joined_data = pd.merge(df,df1,how='left', on = ['title'])
+joined_data.dropna(inplace=True)
 
 # Now we have a nice dataframe with 172 records.
-JoinesData.to_csv('JoinedData.csv')
+joined_data.to_csv('JoinedData.csv')
 ```
 
 ## view output
