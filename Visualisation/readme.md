@@ -1,5 +1,5 @@
 # visualisation practice with python
-This project shows my skills in drawing plots with python.
+This project shows my skills in drawing different plots with python and some visualization libraries.
 
 
 ## Dataset Information from kaggle
@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import pandas as pd
 import numpy as np
-import seaborn  as sns
+import seaborn as sns
 ```
 
 
